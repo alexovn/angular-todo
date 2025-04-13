@@ -4,17 +4,22 @@
       class="todo-app__header-input"
       type="text"
       placeholder="New ToDo"
+      [(ngModel)]="todo"
     >
     <button
       class="todo-app__header-btn btn"
       type="button"
+      (click)="addTodo(todo())"
     >
       Add
     </button>
   </div>
 
   <div class="todo-app__main">
-    <!-- LIST -->
+    <todo-list
+      [todos]="todos()"
+      (onSetTodos)="setTodos($event)"
+    />
   </div>
 
   <!-- <div class="todo-app__footer">

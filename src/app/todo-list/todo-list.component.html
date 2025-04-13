@@ -1,1 +1,9 @@
-<p>todo-list works!</p>
+<ul class="todo-app__list">
+  @for (todo of todos(); track todo.id) {
+    <todo-item
+      [todo]="todo"
+      (onTodoRemove)="removeTodo($event)"
+      (onTodoChange)="changeTodo($event)"
+    />
+  }
+</ul>
