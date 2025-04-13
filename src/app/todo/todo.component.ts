@@ -14,10 +14,10 @@ export class TodoComponent {
   todo = signal('')
   todos = signal<TodoItem[]>([])
 
-  addTodo(todo: string) {
+  addTodo() {
     const item = {
       id: uniqueId('todo-'),
-      name: todo,
+      name: this.todo(),
       completed: false,
       pinned: false
     }
@@ -28,5 +28,11 @@ export class TodoComponent {
 
   setTodos(items: TodoItem[]) {
     this.todos.set(items)
+  }
+
+  onKeyUp(event: KeyboardEvent) {
+    if (event.code === 'Enter') {
+      this.addTodo()
+    }
   }
 }

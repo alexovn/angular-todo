@@ -5,11 +5,12 @@
       type="text"
       placeholder="New ToDo"
       [(ngModel)]="todo"
+      (keyup)="onKeyUp($event)"
     >
     <button
       class="todo-app__header-btn btn"
       type="button"
-      (click)="addTodo(todo())"
+      (click)="addTodo()"
     >
       Add
     </button>

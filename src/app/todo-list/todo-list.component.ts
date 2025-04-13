@@ -20,7 +20,6 @@ export class TodoListComponent {
 
   changeTodo(props: {id: string, value: string}) {
     const {id, value} = props
-
     const updatedTodos = this.todos().map(todo => {
       if (todo.id !== id) return todo
       return {
@@ -28,7 +27,6 @@ export class TodoListComponent {
         name: value
       }
     })
-    console.log(updatedTodos)
     this.onSetTodos.emit(updatedTodos)
   }
 }
