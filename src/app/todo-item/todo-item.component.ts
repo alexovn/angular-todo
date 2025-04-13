@@ -35,6 +35,12 @@ export class TodoItemComponent {
     this.editTodo(false)
   }
 
+  onKeyUp(event: KeyboardEvent) {
+    if (event.code === 'Enter') {
+      this.editTodo(false)
+    }
+  }
+
   constructor() {
     effect(() => {
      if (this.editor()?.nativeElement && this.isEdit()) {

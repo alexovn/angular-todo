@@ -24,6 +24,7 @@
       [value]="todo()?.name"
       (blur)="onEditorBlur()"
       (change)="changeTodo($event)"
+      (keyup)="onKeyUp($event)"
     >
   } @else {
     <label
