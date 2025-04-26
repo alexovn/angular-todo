@@ -1,9 +1,6 @@
 <ul class="todo-app__list">
   @for (todo of todos(); track todo.id) {
-    <todo-item
-      [todo]="todo"
-      (onTodoRemove)="removeTodo($event)"
-      (onTodoChange)="changeTodo($event)"
-    />
+  <todo-item [class.pinned]="todo.pinned" [todo]="todo" (onTodoRemove)="removeTodo($event)"
+    (onTodoChange)="changeTodo($event)" (onTodoComplete)="completeTodo($event)" (onTodoPin)="pinTodo($event)" />
   }
 </ul>

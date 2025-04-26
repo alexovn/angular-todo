@@ -18,13 +18,37 @@ export class TodoListComponent {
     this.onSetTodos.emit(filteredTodos)
   }
 
-  changeTodo(props: {id: string, value: string}) {
-    const {id, value} = props
+  changeTodo(props: { id: string, value: string }) {
+    const { id, value } = props
     const updatedTodos = this.todos().map(todo => {
       if (todo.id !== id) return todo
       return {
         ...todo,
         name: value
+      }
+    })
+    this.onSetTodos.emit(updatedTodos)
+  }
+
+  completeTodo(props: { id: string, completed: boolean }) {
+    const { id, completed } = props
+    const updatedTodos = this.todos().map(todo => {
+      if (todo.id !== id) return todo
+      return {
+        ...todo,
+        completed
+      }
+    })
+    this.onSetTodos.emit(updatedTodos)
+  }
+
+  pinTodo(props: { id: string, pinned: boolean }) {
+    const { id, pinned } = props
+    const updatedTodos = this.todos().map(todo => {
+      if (todo.id !== id) return todo
+      return {
+        ...todo,
+        pinned
       }
     })
     this.onSetTodos.emit(updatedTodos)

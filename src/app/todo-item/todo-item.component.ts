@@ -11,8 +11,19 @@ export class TodoItemComponent {
   todo = input<TodoItem>()
   editor = viewChild<ElementRef>('editor')
   isEdit = signal(false)
+
   onTodoRemove = output<string>()
   onTodoChange = output<{ id: string, value: string }>()
+  onTodoComplete = output<{ id: string, completed: boolean }>()
+  onTodoPin = output<{ id: string, pinned: boolean }>()
+
+  constructor() {
+    effect(() => {
+      if (this.editor()?.nativeElement && this.isEdit()) {
+        this.editor()?.nativeElement.focus()
+      }
+    })
+  }
 
   removeTodo() {
     const itemId = this.todo()?.id ?? '';
@@ -31,6 +42,22 @@ export class TodoItemComponent {
     })
   }
 
+  completeTodo(event: Event) {
+    const itemId = this.todo()?.id ?? ''
+    this.onTodoComplete.emit({
+      id: itemId,
+      completed: (event.target as HTMLInputElement).checked ?? false
+    })
+  }
+
+  pinTodo(event: Event) {
+    const itemId = this.todo()?.id ?? ''
+    this.onTodoPin.emit({
+      id: itemId,
+      pinned: (event.target as HTMLInputElement).checked ?? false
+    })
+  }
+
   onEditorBlur() {
     this.editTodo(false)
   }
@@ -39,13 +66,5 @@ export class TodoItemComponent {
     if (event.code === 'Enter') {
       this.editTodo(false)
     }
-  }
-
-  constructor() {
-    effect(() => {
-     if (this.editor()?.nativeElement && this.isEdit()) {
-        this.editor()?.nativeElement.focus()
-     }
-   })
   }
 }

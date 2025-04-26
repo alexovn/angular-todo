@@ -1,44 +1,25 @@
 <li class="todo-app__item">
-  <!-- <label class="todo-app__item-pin">
-    <input
-      type="checkbox"
-      class="pin-checkbox"
-    >
+  <label class="todo-app__item-pin">
+    <input type="checkbox" class="pin-checkbox" [checked]="todo()?.pinned" (change)="pinTodo($event)">
     <span class="todo-app__item-pin-icon">
-      <i className="fas fa-thumbtack"></i>
+      <i class="fas fa-thumbtack"></i>
     </span>
-  </label> -->
+  </label>
 
-  <!-- <label className="todo-app__item-checkbox">
-    <input
-      className="checkbox"
-      type="checkbox"
-    />
+  <label class="todo-app__item-checkbox">
+    <input class="checkbox" [checked]="todo()?.completed" (change)="completeTodo($event)" type="checkbox" />
     <span></span>
-  </label> -->
+  </label>
 
   @if (isEdit()) {
-    <input
-      #editor
-      class="todo-app__item-editor"
-      [value]="todo()?.name"
-      (blur)="onEditorBlur()"
-      (change)="changeTodo($event)"
-      (keyup)="onKeyUp($event)"
-    >
+  <input #editor class="todo-app__item-editor" [value]="todo()?.name" (blur)="onEditorBlur()"
+    (change)="changeTodo($event)" (keyup)="onKeyUp($event)">
   } @else {
-    <label
-      class="todo-app__item-name"
-      (dblclick)="editTodo(true)"
-    >
-      {{ todo()?.name }}
-    </label>
+  <label class="todo-app__item-name" [class.completed]="todo()?.completed" (dblclick)="editTodo(true)">
+    {{ todo()?.name }}
+  </label>
   }
 
-  <button
-    class="todo-app__remove-btn"
-    type="button"
-    (click)="removeTodo()"
-  >
+  <button class="todo-app__remove-btn" type="button" (click)="removeTodo()">
   </button>
 </li>
