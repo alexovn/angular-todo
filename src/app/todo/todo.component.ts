@@ -89,6 +89,11 @@ export class TodoComponent {
     this.setTodosToLocalStorage()
   }
 
+  clearCompletedTodos() {
+    this.todos.update(todos => todos.filter(todo => !todo.completed))
+    this.setTodosToLocalStorage()
+  }
+
   onKeyUp(event: KeyboardEvent) {
     if (event.code === 'Enter') {
       this.addTodo()
