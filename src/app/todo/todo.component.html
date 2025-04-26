@@ -1,66 +1,33 @@
 <div class="todo-app">
   <div class="todo-app__header">
-    <input
-      class="todo-app__header-input"
-      type="text"
-      placeholder="New ToDo"
-      [(ngModel)]="todo"
-      (keyup)="onKeyUp($event)"
-    >
-    <button
-      class="todo-app__header-btn btn"
-      type="button"
-      (click)="addTodo()"
-    >
+    <input class="todo-app__header-input" type="text" placeholder="New ToDo" [(ngModel)]="todo"
+      (keyup)="onKeyUp($event)">
+    <button class="todo-app__header-btn btn" type="button" (click)="addTodo()">
       Add
     </button>
   </div>
 
   <div class="todo-app__main">
-    <todo-list
-      [todos]="todos()"
-      (onSetTodos)="setTodos($event)"
-    />
+    <todo-list [todos]="filteredTodos()" (onSetTodos)="setTodos($event)" />
   </div>
 
-  <!-- <div class="todo-app__footer">
-    <div class="todo-app__counter"></div>
+  <div class="todo-app__footer">
+    <div class="todo-app__counter">
+      {{filteredSentence()}}
+    </div>
 
-    <ul className="todo-app__filters">
-      <li
-        className="todo-app__filters-item"
-      >
-        <a
-          href="#!"
-        >
-          All
+    <ul class="todo-app__filters">
+      @for (filter of filters(); track filter.label) {
+      <li class="todo-app__filters-item" (click)="filter.click()">
+        <a href="#!" [class.selected]="filter.active">
+          {{filter.label}}
         </a>
       </li>
-      <li
-        className="todo-app__filters-item"
-      >
-        <a
-          href="#!"
-        >
-          Active
-        </a>
-      </li>
-      <li
-        className="todo-app__filters-item"
-      >
-        <a
-          href="#!"
-        >
-          Completed
-        </a>
-      </li>
+      }
     </ul>
-    
-    <button
-      className="btn todo-app__clear-btn"
-      type="button"
-    >
+
+    <button class="btn todo-app__clear-btn" type="button">
       Clear completed
     </button>
-  </div> -->
+  </div>
 </div>
