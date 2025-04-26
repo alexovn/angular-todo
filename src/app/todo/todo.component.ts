@@ -50,6 +50,27 @@ export class TodoComponent {
     return `${this.filteredTodos().length} ${this.filteredTodos().length === 1 ? 'item' : 'items'} left`
   })
 
+  ngOnInit() {
+    const _todos = localStorage.getItem('todos')
+
+    if (_todos) {
+      const todos = JSON.parse(_todos)
+      this.todos.set(todos)
+    } else {
+      const defaultTodo = {
+        id: 'todo-0',
+        name: 'Walk with a dog 🐕',
+        completed: false,
+        pinned: false,
+      }
+      this.todos.set([defaultTodo])
+    }
+  }
+
+  setTodosToLocalStorage() {
+    localStorage.setItem('todos', JSON.stringify(this.todos()))
+  }
+
   addTodo() {
     const item = {
       id: uniqueId('todo-'),
@@ -60,10 +81,12 @@ export class TodoComponent {
 
     this.todos.update(todos => [...todos, item])
     this.todo.set('')
+    this.setTodosToLocalStorage()
   }
 
   setTodos(items: TodoItem[]) {
     this.todos.set(items)
+    this.setTodosToLocalStorage()
   }
 
   onKeyUp(event: KeyboardEvent) {
